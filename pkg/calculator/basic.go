@@ -1,6 +1,21 @@
 package calculator
 
-import "errors"
+import (
+	"errors"
+	"github.com/joaopapereira/versioned-module/v2/pkg/converter"
+)
+
+func AddString(num1 string, num2 string) (int, error) {
+	a, err := converter.StrToInt(num1)
+	if err != nil {
+		return 0, errors.Join(errors.New("conversion first number"), err)
+	}
+	b, err := converter.StrToInt(num2)
+	if err != nil {
+		return 0, errors.Join(errors.New("conversion second number"), err)
+	}
+	return Add(a, b), nil
+}
 
 func Add(a, b int) int {
 	return a + b
